@@ -23,12 +23,9 @@ import java.util.Collections;
 import static org.junit.Assert.assertEquals;
 
 @ActiveProfiles("bdd")
-@SpringBootTest(classes = Application.class)
+@SpringBootTest
 @CucumberContextConfiguration
-@EmbeddedKafka(
-        partitions = 1,
-        topics = "my-topic-3"
-)
+@EmbeddedKafka
 public class CucumberSteps {
 
     @Autowired
@@ -46,9 +43,9 @@ public class CucumberSteps {
         consumer.subscribe(Collections.singletonList("my-topic-3"));
     }
 
-    @Given("que o sistema A enviou uma mensagem")
-    public void send() {
-        producer.send("my-topic-2", "Test");
+    @Given("que o sistema A enviou uma mensagem {string}")
+    public void send(String msg) {
+        producer.send("my-topic-2", msg);
     }
 
     @And("que será validada com sucesso")
@@ -61,10 +58,10 @@ public class CucumberSteps {
 
     }
 
-    @Then("produzirá uma mensagem ao Sistema B")
-    public void check() {
+    @Then("produzirá uma mensagem ao Sistema B {string}")
+    public void check(String msg) {
         ConsumerRecord<String, String> cr = KafkaTestUtils.getSingleRecord(consumer, "my-topic-3");
 
-        assertEquals("Test", cr.value());
+        assertEquals(msg, cr.value());
     }
 }
