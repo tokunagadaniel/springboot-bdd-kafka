@@ -1,7 +1,6 @@
-Feature: A mensagem será recebida, validada e será enviada ao sistema B.
-
+Feature: A mensagem será recebida, validada e será enviada ao sistema B
   Scenario: A mensagem será validada com sucesso
-    Dado que o sistema A enviou uma mensagem "Hello ET"
-    E que será validada com sucesso
-    Quando aplicação receber essa mensagem
-    Então produzirá uma mensagem ao Sistema B "Hello ET"
+    Given que o sistema A enviou uma mensagem
+    And que será validada com sucesso
+    When aplicação receber essa mensagem
+    Then produzirá uma mensagem ao Sistema B

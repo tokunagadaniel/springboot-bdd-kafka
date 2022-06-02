@@ -15,7 +15,7 @@
 	<description>Spring Boot application integrated with kafka and cucumber</description>
 	<properties>
 		<java.version>11</java.version>
-		<cucumber.version>6.8.0</cucumber.version>
+		<cucumber.version>7.3.4</cucumber.version>
 	</properties>
 	<dependencies>
 		<dependency>
